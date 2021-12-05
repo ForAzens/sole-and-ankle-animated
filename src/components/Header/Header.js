@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
 
-import { QUERIES, WEIGHTS } from '../../constants';
-import Logo from '../Logo';
-import Icon from '../Icon';
-import UnstyledButton from '../UnstyledButton';
-import SuperHeader from '../SuperHeader';
-import MobileMenu from '../MobileMenu';
-import VisuallyHidden from '../VisuallyHidden';
+import { QUERIES, WEIGHTS } from "../../constants";
+import Logo from "../Logo";
+import Icon from "../Icon";
+import UnstyledButton from "../UnstyledButton";
+import SuperHeader from "../SuperHeader";
+import MobileMenu from "../MobileMenu";
+import VisuallyHidden from "../VisuallyHidden";
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -20,12 +20,42 @@ const Header = () => {
           <Logo />
         </LogoWrapper>
         <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavLink href="/sale">
+            <span className="normal">Sale</span>
+            <span aria-hidden="true" className="active">
+              Sale
+            </span>
+          </NavLink>
+          <NavLink href="/new">
+            <span className="normal">New&nbsp;Release</span>
+            <span aria-hidden="true" className="active">
+              New&nbsp;Releases
+            </span>
+          </NavLink>
+          <NavLink href="/men">
+            <span className="normal">Men</span>
+            <span aria-hidden="true" className="active">
+              Men
+            </span>
+          </NavLink>
+          <NavLink href="/women">
+            <span className="normal">Women</span>
+            <span aria-hidden="true" className="active">
+              Women
+            </span>
+          </NavLink>
+          <NavLink href="/kids">
+            <span className="normal">Kids</span>
+            <span aria-hidden="true" className="active">
+              Kids
+            </span>
+          </NavLink>
+          <NavLink href="/collections">
+            <span className="normal">Collections</span>
+            <span aria-hidden="true" className="active">
+              Collections
+            </span>
+          </NavLink>
         </DesktopNav>
         <MobileActions>
           <ShoppingBagButton>
@@ -120,9 +150,40 @@ const NavLink = styled.a`
   text-decoration: none;
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
+  overflow: hidden;
+  position: relative;
 
   &:first-of-type {
     color: var(--color-secondary);
+  }
+
+  & .normal {
+    display: inline-block;
+  }
+
+  & .active {
+    display: block;
+    position: absolute;
+    font-weight: ${WEIGHTS.bold};
+  }
+
+    &:is(:focus, :hover) span {
+      transform: translateY(-100%);
+    }
+
+  
+  @media (prefers-reduced-motion: no-preference) {
+    & .normal {
+      transition: transform 400ms;
+    }
+
+    & .active {
+      transition: transform 400ms;
+    }
+
+    &:is(:focus, :hover) span {
+      transition-duration: 300ms;
+    }
   }
 `;
 

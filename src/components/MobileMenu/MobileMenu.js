@@ -19,17 +19,35 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
         </CloseButton>
         <Filler />
         <Nav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavLink style={{ "--delay-order": 0 }} href="/sale">
+            Sale
+          </NavLink>
+          <NavLink style={{ "--delay-order": 1 }} href="/new">
+            New&nbsp;Releases
+          </NavLink>
+          <NavLink style={{ "--delay-order": 2 }} href="/men">
+            Men
+          </NavLink>
+          <NavLink style={{ "--delay-order": 3 }} href="/women">
+            Women
+          </NavLink>
+          <NavLink style={{ "--delay-order": 4 }} href="/kids">
+            Kids
+          </NavLink>
+          <NavLink style={{ "--delay-order": 5 }} href="/collections">
+            Collections
+          </NavLink>
         </Nav>
         <Footer>
-          <SubLink href="/terms">Terms and Conditions</SubLink>
-          <SubLink href="/privacy">Privacy Policy</SubLink>
-          <SubLink href="/contact">Contact Us</SubLink>
+          <SubLink style={{ "--delay-order": 6 }} href="/terms">
+            Terms and Conditions
+          </SubLink>
+          <SubLink style={{ "--delay-order": 7 }} href="/privacy">
+            Privacy Policy
+          </SubLink>
+          <SubLink style={{ "--delay-order": 8 }} href="/contact">
+            Contact Us
+          </SubLink>
         </Footer>
       </Content>
     </Overlay>
@@ -56,6 +74,17 @@ const slideIn = keyframes`
   }
 `;
 
+const fadeAndSlideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+`;
+
 const Overlay = styled(DialogOverlay)`
   position: fixed;
   top: 0;
@@ -76,13 +105,13 @@ const Content = styled(DialogContent)`
   padding: 24px 32px;
   display: flex;
   flex-direction: column;
-  
-  animation: ${slideIn} 200ms both cubic-bezier(1,.01,.67,.92);
+
+  animation: ${slideIn} 200ms both cubic-bezier(1, 0.01, 0.67, 0.92);
   animation-delay: 100ms;
-  
+
   & > * {
     animation: ${fadeIn} 200ms both;
-    animation-delay: 275ms;
+    animation-delay: 350ms;
   }
 `;
 
@@ -109,6 +138,9 @@ const NavLink = styled.a`
   &:first-of-type {
     color: var(--color-secondary);
   }
+
+  animation: ${fadeAndSlideIn} 150ms both ease-out;
+  animation-delay: calc(var(--delay-order) * 75ms + 350ms);
 `;
 
 const Filler = styled.div`
@@ -126,6 +158,9 @@ const SubLink = styled.a`
   color: var(--color-gray-700);
   font-size: 0.875rem;
   text-decoration: none;
+
+  animation: ${fadeAndSlideIn} 150ms both ease-out;
+  animation-delay: calc(var(--delay-order) * 75ms + 350ms);
 `;
 
 export default MobileMenu;

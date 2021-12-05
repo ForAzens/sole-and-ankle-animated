@@ -69,7 +69,9 @@ const Link = styled.a`
   color: inherit;
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+  position: relative;
+`;
 
 const ImageWrapper = styled.div`
   position: relative;
@@ -134,6 +136,20 @@ const Flag = styled.div`
   font-weight: ${WEIGHTS.bold};
   color: var(--color-white);
   border-radius: 2px;
+
+  will-change: transform;
+
+  ${Link}:hover & {
+    transform: translateX(-5%) scale(1.1);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 500ms;
+
+    ${Link}:hover & {
+      transition: transform 200ms;
+    }
+  }
 `;
 
 const SaleFlag = styled(Flag)`
